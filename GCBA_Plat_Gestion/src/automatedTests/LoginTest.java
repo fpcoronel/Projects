@@ -7,9 +7,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driverSetUp.DriverSetUp;
 import pageObjects.LoginPage;
@@ -44,8 +46,14 @@ public class LoginTest extends DriverSetUp{
   //Click Login Button
   loginPage.ClickLoginButton();
   
-  //Verify user is logged in
+   //Verify user is logged in
   Assert.assertTrue(homePage.verifyHomePageTitle(), "Sign In page title doesn't match");
+  
+  WebDriverWait wait = new WebDriverWait(driver, 10);
+  wait.until(ExpectedConditions.visibilityOfElementLocated(By.ById.className("menuExit")));
+  
+  //Exit
+  //homePage.ExitLoginButton();;
 
   }
 

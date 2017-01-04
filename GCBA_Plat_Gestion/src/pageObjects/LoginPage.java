@@ -15,10 +15,7 @@ public class LoginPage {
 	@FindBy(how=How.CLASS_NAME, using="btn-lg")
 	private WebElement loginButton;
 	
-	/*public LoginPage(WebDriver driver){
-		this.driver=driver;
-	}*/
-	
+
 	//Define User name Enter Method
 	public void EnterUserName(String usernametext)
 	{

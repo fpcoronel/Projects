@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="17260" started-at="2017-01-04T22:52:07Z" finished-at="2017-01-04T22:52:24Z">
+  <suite name="Default suite" duration-ms="26508" started-at="2017-01-09T22:54:35Z" finished-at="2017-01-09T22:55:01Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="17260" started-at="2017-01-04T22:52:07Z" finished-at="2017-01-04T22:52:24Z">
-      <class name="automatedTests.LoginTest">
-        <test-method status="PASS" signature="initializeDriverSetup(java.lang.String, java.lang.String)[pri:0, instance:automatedTests.LoginTest@1bce4f0a]" name="initializeDriverSetup" is-config="true" duration-ms="11071" started-at="2017-01-04T19:52:07Z" finished-at="2017-01-04T19:52:18Z">
+    <test name="Default test" duration-ms="26508" started-at="2017-01-09T22:54:35Z" finished-at="2017-01-09T22:55:01Z">
+      <class name="automatedTests.NewStrategicObjTest">
+        <test-method status="PASS" signature="initializeDriverSetup(java.lang.String, java.lang.String)[pri:0, instance:automatedTests.NewStrategicObjTest@29774679]" name="initializeDriverSetup" is-config="true" duration-ms="7540" started-at="2017-01-09T19:54:35Z" finished-at="2017-01-09T19:54:42Z">
           <params>
             <param index="0">
               <value>
@@ -23,23 +23,19 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeDriverSetup -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:automatedTests.LoginTest@1bce4f0a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-01-04T19:52:18Z" finished-at="2017-01-04T19:52:18Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:automatedTests.NewStrategicObjTest@29774679]" name="setUp" is-config="true" duration-ms="1" started-at="2017-01-09T19:54:42Z" finished-at="2017-01-09T19:54:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="Login()[pri:0, instance:automatedTests.LoginTest@1bce4f0a]" name="Login" duration-ms="6159" started-at="2017-01-04T19:52:18Z" description="Login Test" finished-at="2017-01-04T19:52:24Z">
+        <test-method status="PASS" signature="CreateNewStrategicObj()[pri:0, instance:automatedTests.NewStrategicObjTest@29774679]" name="CreateNewStrategicObj" duration-ms="18936" started-at="2017-01-09T19:54:42Z" description="Crear nuevo Objetivo Operativo" finished-at="2017-01-09T19:55:01Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Login -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:automatedTests.LoginTest@1bce4f0a]" name="afterClass" is-config="true" duration-ms="1" started-at="2017-01-04T19:52:24Z" finished-at="2017-01-04T19:52:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterClass -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:automatedTests.LoginTest@1bce4f0a]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-01-04T19:52:24Z" finished-at="2017-01-04T19:52:24Z">
+        </test-method> <!-- CreateNewStrategicObj -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:automatedTests.NewStrategicObjTest@29774679]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-01-09T19:55:01Z" finished-at="2017-01-09T19:55:01Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- automatedTests.LoginTest -->
+      </class> <!-- automatedTests.NewStrategicObjTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

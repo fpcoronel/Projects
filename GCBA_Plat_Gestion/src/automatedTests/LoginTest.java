@@ -1,19 +1,21 @@
 package automatedTests;
 
+//TestNG
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.By;
+
+//Selenium
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+//Driver
 import driverSetUp.DriverSetUp;
+
+//Pages
 import pageObjects.LoginPage;
 import pageObjects.HomePage;
 
@@ -37,6 +39,7 @@ public class LoginTest extends DriverSetUp{
   LoginPage loginPage=PageFactory.initElements(driver, LoginPage.class);
   HomePage homePage = PageFactory.initElements(driver, HomePage.class);
   
+
   //Enter user name
   loginPage.EnterUserName("abouperez@buenosaires.gob.ar");
   
@@ -46,23 +49,22 @@ public class LoginTest extends DriverSetUp{
   //Click Login Button
   loginPage.ClickLoginButton();
   
+  homePage.waitForLoad(driver);
+  
    //Verify user is logged in
-  Assert.assertTrue(homePage.verifyHomePageTitle(), "Sign In page title doesn't match");
-  
-  WebDriverWait wait = new WebDriverWait(driver, 10);
-  wait.until(ExpectedConditions.visibilityOfElementLocated(By.ById.className("menuExit")));
-  
-  //Exit
-  //homePage.ExitLoginButton();;
+  Assert.assertTrue(homePage.ExitIsPresent(),"Login failed");
+ 
+ //Exit
+  if (homePage.ExitIsPresent())
+  homePage.ClickExitButton();
 
   }
-
-
+  
   @AfterClass
   public void afterClass() {
 	  
 	// Close the driver
-	//driver.quit();
+	driver.quit();
   }
 
 }

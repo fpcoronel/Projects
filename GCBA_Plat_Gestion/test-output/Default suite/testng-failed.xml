@@ -5,15 +5,14 @@
   <parameter name="browserType" value="chrome"/>
   <test name="Default test(failed)">
     <classes>
-      <class name="automatedTests.LoginTest">
+      <class name="automatedTests.NewStrategicObjTest">
         <methods>
-          <include name="Login"/>
           <include name="initializeDriverSetup"/>
-          <include name="afterClass"/>
-          <include name="tearDown"/>
           <include name="setUp"/>
+          <include name="CreateNewStrategicObj"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- automatedTests.LoginTest -->
+      </class> <!-- automatedTests.NewStrategicObjTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

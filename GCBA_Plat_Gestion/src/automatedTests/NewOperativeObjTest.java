@@ -1,5 +1,7 @@
 package automatedTests;
 
+import java.util.Random;
+
 //Selenium
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,8 +35,12 @@ public class NewOperativeObjTest extends DriverSetUp{
 			driver = getDriver();
 		}
 		
-		@Test(description = "Crear nuevo Objetivo Operativo")
+		@Test (description = "Crear nuevo Objetivo Operativo")
 		public void CreateNewObjOp() throws InterruptedException{
+			
+			  Random rndNum= new Random();
+			  int rndNum1 = 0;
+			  rndNum1 = rndNum.nextInt((500-0));
 			
 			 //Initialize Pages
 			  LoginPage loginPage= PageFactory.initElements(driver, LoginPage.class);
@@ -60,7 +66,7 @@ public class NewOperativeObjTest extends DriverSetUp{
 			  homePage.ClickNewOpObjButton();
 			  
 			  //Enter Name New Operative Objective
-			  homePage.EnterNameNewOpOBJ("Automated New Operative Objective");
+			  homePage.EnterNameNewOBJ("Automated New Operative Objective " + rndNum1);
 			  
 			  homePage.waitForLoad(driver);
 			
@@ -69,11 +75,21 @@ public class NewOperativeObjTest extends DriverSetUp{
 			  
 			  homePage.SpinnerIsInvisible();			  
 
-			  Assert.assertTrue(homePage.ObjectiveisPresent("Automated New Operative Objective"), "Objetivo no encontrado");
+			  Assert.assertTrue(homePage.ObjectiveisPresent("Automated New Operative Objective " + rndNum1), "Objetivo no encontrado");
+			  
+		}
+		
+		  @AfterClass
+		  public void afterClass() {
+			  
+			  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			  
 			  //Exit
-			  homePage.ClickExitButton();
-		}
+			  homePage.ClickExitButton(); 
+			  
+			// Close the driver
+			driver.quit();
+		  }
 }
 
 		

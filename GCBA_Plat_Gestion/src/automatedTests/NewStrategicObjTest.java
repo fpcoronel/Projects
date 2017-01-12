@@ -1,14 +1,13 @@
 package automatedTests;
 
+import java.util.Random;
+
 //Selenium
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 //TestNG
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.Assert;
@@ -33,10 +32,14 @@ public class NewStrategicObjTest extends DriverSetUp {
 		driver = getDriver();
 	}
 	
-	@Test(description = "Crear nuevo Objetivo Operativo")
+	@Test(description = "Crear nuevo Objetivo Estratégico")
 	public void CreateNewStrategicObj() throws InterruptedException{
 		
-		 //Initialize Pages
+		  Random rndNum= new Random();
+		  int rndNum1 = 0;
+		  rndNum1 = rndNum.nextInt((500-0));
+		
+		//Initialize Pages
 		  LoginPage loginPage= PageFactory.initElements(driver, LoginPage.class);
 		  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		  
@@ -55,17 +58,13 @@ public class NewStrategicObjTest extends DriverSetUp {
 		  homePage.SpinnerIsInvisible();
 		  
 		  //wait until Alert disappears
-		  homePage.AlertIsInvisible();
-		  
-		  homePage.ExitIsPresent();
+		  homePage.AlertIsInvisible();	  
 		  
 		  //Click New Strategic Objective Button
 		  homePage.ClickNewStrategicObjButton();
 		  
 		  //Enter Name New Strategic Objective
-		  homePage.EnterNameNewOpOBJ("Automated New Strategic Objective");
-		  
-		  homePage.waitForLoad(driver);
+		  homePage.EnterNameNewOBJ("Automated New Strategic Objective " + rndNum1);
 		  
 		  //wait until Alert disappears
 		  homePage.AlertIsInvisible();
@@ -73,14 +72,21 @@ public class NewStrategicObjTest extends DriverSetUp {
 		  //Save New Strategic Objective
 		  homePage.ClickSaveStrategicObjButton();
 		  
-		  //homePage.AlertIsInvisible();
-		  
 		  homePage.SpinnerIsInvisible();			  
 	
-		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective"), "Objetivo no encontrado");
+		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
+	}
+	
+	  @AfterClass
+	  public void afterClass() {
+		  
+		  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		  
 		  //Exit
-		  homePage.ClickExitButton();
-	}
+		  homePage.ClickExitButton(); 
+		  
+		// Close the driver
+		driver.quit();
+	  }
 
 }

@@ -23,10 +23,10 @@ public class HomePage {
 	private WebElement NewObjOpButton;
 	
 	@FindBy(how=How.XPATH, using="/html/body/div[1]/main/main/div/div/div/div[4]/div/div[3]/div[1]/button")
-	private WebElement NewStrategicOpButton;
+	  private WebElement NewStrategicOpButton;
 		
 	@FindBy(how=How.XPATH, using="//*[@id=\"name\"]")
-	private WebElement NewOpObjField;	
+	private WebElement NameNewObjField;	
 
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/button[1]")  
 	private WebElement SaveOpObjButton;
@@ -45,6 +45,30 @@ public class HomePage {
 	
 	@FindBy(how=How.ID, using="alert")
 	private WebElement Alert;	
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div/button")
+	private WebElement NewInd1Button;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[1]/input")
+	private WebElement Ind1NameField;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[2]/input")
+	private WebElement I1CalcMethNameField;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[3]/input")
+	private WebElement I1RelWeightField;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[4]/div/button")
+	private WebElement NewInd2Button;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[1]/input")
+	private WebElement Ind2NameField;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[2]/input")
+	private WebElement I2CalcMethNameField;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[3]/input")
+	private WebElement I2RelWeightField;
 	
 	public HomePage(WebDriver driver){
 		this.driver=driver;
@@ -82,6 +106,7 @@ public class HomePage {
 	//Wait until Alert is invisible
 	public boolean AlertIsInvisible() {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
+		driver.findElement(By.xpath("//*[@id=\"alert\"]/a[1]")).click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated((By.id("alert"))));
 		boolean check = driver.findElements(By.id("alert")).size() > 0;
 		return check;
@@ -91,8 +116,8 @@ public class HomePage {
 	public boolean ObjectiveisPresent(String newOpObj) {		
 		boolean check = false;
 		List<WebElement> OpObjElements = ListOpObj.findElements(By.tagName("li"));		
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#grupo-level-1 > ul")));
+		//WebDriverWait wait = new WebDriverWait(driver, 20);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#grupo-level-1 > ul")));
 			
 		 for(int i=0;i<OpObjElements.size();i++){
 			 String OpObj =(OpObjElements.get(i).getText());
@@ -124,9 +149,9 @@ public class HomePage {
 	}
 
 	//Enter New Operative Objective Name 
-	public void EnterNameNewOpOBJ(String newOpObj)
+	public void EnterNameNewOBJ(String newOpObj)
 	{
-	NewOpObjField.sendKeys(newOpObj);
+	NameNewObjField.sendKeys(newOpObj);
 	}
 	
 	//Click Save Button for New Operative Objective 
@@ -151,12 +176,71 @@ public class HomePage {
 		SaveStrategicObjButton.click();
 	}
 	
+	//Click New Indicator Button
+	public void ClickNewIndButton(int Ind)
+	{
+		switch(Ind) {
+        case 0:
+        	NewInd1Button.click();
+		break;
+        case 1:
+        	NewInd2Button.click();
+		break;
+        default:
+        	break;
+		}	
+	}
+	
+	//Enter new Indicator name
+	public void EnterNameNewInd(int ind, String newIndName)
+	{
+		switch(ind) {
+        case 0:
+        	Ind1NameField.sendKeys(newIndName);
+		break;
+        case 1:
+        	Ind2NameField.sendKeys(newIndName);
+		break;
+        default:
+        	break;
+		}	
+	}
+	
+	//Enter new Calculation Method
+	public void EnterNewMethCalc(int ind, String newMethCalcName)
+	{
+		switch(ind) {
+        case 0:
+        	I1CalcMethNameField.sendKeys(newMethCalcName);
+		break;
+        case 1:
+        	I2CalcMethNameField.sendKeys(newMethCalcName);
+		break;
+        default:
+        	break;
+		}	
+	}	
+	
+	public void EnterNewRelWeight(int ind, int weight)
+	{
+		String RelWeight = Integer.toString(weight);
+		
+		switch(ind) {
+        case 0:
+        	I1RelWeightField.sendKeys(RelWeight);
+		break;
+        case 1:
+        	I2RelWeightField.sendKeys(RelWeight);
+		break;
+        default:
+        	break;
+		}	
+	}	
+	
 	//New Strategic Objective is present? 
 		public boolean STObjectiveisPresent(String newSTObj) {		
 			boolean check = false;
-			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));		
-			WebDriverWait wait = new WebDriverWait(driver, 20);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/main/main/div/div/div/div[4]")));
+			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));	
 				
 			 for(int i=0;i<STObjElements.size();i++){
 				 String STObj =(STObjElements.get(i).getText());
@@ -165,6 +249,33 @@ public class HomePage {
 				 }
 			 }
 			 return check;
+		}	
+		
+		
+		//Display Strategic Obj
+		public void DisplayStrategicObj(String pSTObj){
+			
+			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+			
+			 for(int i=0;i<STObjElements.size();i++){
+				 String STObj =(STObjElements.get(i).getText());
+				 if (STObj.equals(pSTObj)){
+					 
+					 String att_href = (STObjElements.get(i).getAttribute("href"));
+					 String id = att_href.substring(att_href.length() - 3);
+					 String pxpath = "//*[@id=\"es-" + id + "\"]/div/div/div/p/span";
+					 WebElement editButton = driver.findElement(By.xpath("//*[@id=\"es-" + id + "\"]/div/div/div/p/span"));
+					 
+					// Create instance of Javascript executor					 
+					 JavascriptExecutor je = (JavascriptExecutor) driver;
+					 
+					// now execute query which actually will scroll until that element is not appeared on page.					 
+					 je.executeScript("arguments[0].scrollIntoView(true);",editButton);
+					 
+					 //click edit button
+					 driver.findElement(By.xpath(pxpath)).click();
+				 }				 
+			 }	
 		}
 
 }	

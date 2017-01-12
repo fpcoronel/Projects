@@ -32,36 +32,39 @@ public class LoginTest extends DriverSetUp{
 	}
 	
   @Test(description = "Login Test")
-    public void Login(){
+  
+  public void Login(){
+
+	  //Initialize Pages
+	  LoginPage loginPage=PageFactory.initElements(driver, LoginPage.class);
+	  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 	  
-
-  //Initialize Pages
-  LoginPage loginPage=PageFactory.initElements(driver, LoginPage.class);
-  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-  
-
-  //Enter user name
-  loginPage.EnterUserName("abouperez@buenosaires.gob.ar");
-  
-  //Enter Password
-  loginPage.EnterPassword("Test123");
-  
-  //Click Login Button
-  loginPage.ClickLoginButton();
-  
-  homePage.waitForLoad(driver);
-  
-   //Verify user is logged in
-  Assert.assertTrue(homePage.ExitIsPresent(),"Login failed");
+	
+	  //Enter user name
+	  loginPage.EnterUserName("abouperez@buenosaires.gob.ar");
+	  
+	  //Enter Password
+	  loginPage.EnterPassword("Test123");
+	  
+	  //Click Login Button
+	  loginPage.ClickLoginButton();
+	  
+	  homePage.waitForLoad(driver);
+	  
+	   //Verify user is logged in
+	  Assert.assertTrue(homePage.ExitIsPresent(),"Login failed");
  
- //Exit
-  if (homePage.ExitIsPresent())
-  homePage.ClickExitButton();
 
   }
   
   @AfterClass
   public void afterClass() {
+	  
+	  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+	  
+	  //Exit
+	  if (homePage.ExitIsPresent())
+	  homePage.ClickExitButton(); 
 	  
 	// Close the driver
 	driver.quit();

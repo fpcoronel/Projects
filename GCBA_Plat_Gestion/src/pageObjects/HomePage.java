@@ -16,14 +16,17 @@ public class HomePage {
 
 	WebDriver driver;
 	
+	@FindBy(how=How.ID, using="errorModal")
+	private WebElement Error;	
+	
 	@FindBy(how=How.XPATH, using="//*[@id=\"bs-example-navbar-collapse-1\"]/ul[2]/li[2]/a")
 	private WebElement exitButton;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-1\"]/div[1]/button/span")
 	private WebElement NewObjOpButton;
 	
-	@FindBy(how=How.XPATH, using="/html/body/div[1]/main/main/div/div/div/div[4]/div/div[3]/div[1]/button")
-	  private WebElement NewStrategicOpButton;
+	@FindBy(how=How.CSS, using="button[ng-click='homeCtrl.addStrategicObjective(homeCtrl.jurisdiccion.idJurisdiccion)']")
+	 private WebElement NewStrategicOpButton;
 		
 	@FindBy(how=How.XPATH, using="//*[@id=\"name\"]")
 	private WebElement NameNewObjField;	
@@ -34,22 +37,23 @@ public class HomePage {
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/button[1]")  
 	private WebElement SaveStrategicObjButton;	
 	
-	@FindBy(how=How.CSS, using="#grupo-level-1 > ul")
+	@FindBy(how=How.CSS, using="#grupo-level-1 > ul") 
 	private WebElement ListOpObj;
 	
-	@FindBy(how=How.XPATH, using="/html/body/div[1]/main/main/div/div/div/div[4]/div/div[3]/div[2]")
+	@FindBy(how=How.CLASS_NAME, using="colorObjOperativo") //"/html/body/div[1]/main/main/div/div/div/div[4]/div/div[3]/div[2]")  
 	private WebElement ListSTObj;
-	
+
 	@FindBy(how=How.CSS, using="body > div.loadingoverlay")
 	private WebElement Spinner;	
 	
 	@FindBy(how=How.ID, using="alert")
 	private WebElement Alert;	
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div/button")
+	//@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div/button")  
+	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
 	private WebElement NewInd1Button;
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[1]/input")
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[1]/input") 
 	private WebElement Ind1NameField;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[2]/input")
@@ -58,10 +62,11 @@ public class HomePage {
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[3]/input")
 	private WebElement I1RelWeightField;
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[4]/div/button")
+	//@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[4]/div/button")  
+	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
 	private WebElement NewInd2Button;
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[1]/input")
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[1]/input") 
 	private WebElement Ind2NameField;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[2]/input")
@@ -69,6 +74,12 @@ public class HomePage {
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div[3]/input")
 	private WebElement I2RelWeightField;
+	
+	@FindBy(how=How.ID, using="grupo-level-3-3")
+	private WebElement ListIndName;
+	
+	@FindBy(how=How.CSS, using="div[href='#carouselContent']")
+	private WebElement ProyCarousel;
 	
 	public HomePage(WebDriver driver){
 		this.driver=driver;
@@ -106,13 +117,31 @@ public class HomePage {
 	//Wait until Alert is invisible
 	public boolean AlertIsInvisible() {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-		driver.findElement(By.xpath("//*[@id=\"alert\"]/a[1]")).click();
+		//driver.findElement(By.xpath("//*[@id=\"alert\"]/a[1]")).click();	
+		wait.until(ExpectedConditions.visibilityOfElementLocated((By.id("alert"))));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated((By.id("alert"))));
 		boolean check = driver.findElements(By.id("alert")).size() > 0;
 		return check;
-	}		
+	}
+	
+	//Close Projects Carousel
+	public void CloseProyCarousel(){
+		ProyCarousel.click();		
+	}
+	
+	//Check if an error after login
+	public boolean ErrorIsPresent(){
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		boolean check = false;
+		wait.until(ExpectedConditions.visibilityOf(Error));
+		check = driver.findElements(By.id("errorModal")).size() > 0;
+		if (check == true) {
+			driver.findElement(By.xpath("//*[@id=\"errorModal\"]/div/div/div[3]/button")).click();
+		}
+		return check;
+	}
 
-	//New Operative Objective is present? 
+	//Assert Operative Objective
 	public boolean ObjectiveisPresent(String newOpObj) {		
 		boolean check = false;
 		List<WebElement> OpObjElements = ListOpObj.findElements(By.tagName("li"));		
@@ -164,8 +193,11 @@ public class HomePage {
 	
 	//Click New Strategic Obj Button
 	public void ClickNewStrategicObjButton()
-	{
-		NewStrategicOpButton.click();
+	{		
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(NewStrategicOpButton));
+		
+		 NewStrategicOpButton.click();
 	}
 	
 	//Click Save Button for New Strategic Objective 
@@ -237,7 +269,7 @@ public class HomePage {
 		}	
 	}	
 	
-	//New Strategic Objective is present? 
+	    //Assert Strategic Objective
 		public boolean STObjectiveisPresent(String newSTObj) {		
 			boolean check = false;
 			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));	
@@ -249,8 +281,7 @@ public class HomePage {
 				 }
 			 }
 			 return check;
-		}	
-		
+		}
 		
 		//Display Strategic Obj
 		public void DisplayStrategicObj(String pSTObj){
@@ -261,9 +292,10 @@ public class HomePage {
 				 String STObj =(STObjElements.get(i).getText());
 				 if (STObj.equals(pSTObj)){
 					 
+					 //Create xpath to locate element
 					 String att_href = (STObjElements.get(i).getAttribute("href"));
 					 String id = att_href.substring(att_href.length() - 3);
-					 String pxpath = "//*[@id=\"es-" + id + "\"]/div/div/div/p/span";
+					 
 					 WebElement editButton = driver.findElement(By.xpath("//*[@id=\"es-" + id + "\"]/div/div/div/p/span"));
 					 
 					// Create instance of Javascript executor					 
@@ -273,9 +305,24 @@ public class HomePage {
 					 je.executeScript("arguments[0].scrollIntoView(true);",editButton);
 					 
 					 //click edit button
-					 driver.findElement(By.xpath(pxpath)).click();
+					 editButton.click();
 				 }				 
 			 }	
+		}
+		
+		//Assert Indicators
+		public boolean IndicatorIsCreated(String pIndicatorName){
+			boolean check = false;
+			List<WebElement> IndicatorElements = ListIndName.findElements(By.cssSelector("input[ng-model='indicador.nombre']"));
+			
+			for(int i=0;i<IndicatorElements.size();i++){
+				String IndicatorName = IndicatorElements.get(i).getAttribute("value");
+				if(IndicatorName.equals(pIndicatorName)){
+					check = true;
+				}
+			}
+			
+			return check;
 		}
 
 }	

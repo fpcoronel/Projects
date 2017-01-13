@@ -60,15 +60,18 @@ public class NewOperativeObjTest extends DriverSetUp{
 			  //Wait until Spinner disappears
 			  homePage.SpinnerIsInvisible();
 			  
-			  homePage.ExitIsPresent();
+			  homePage.CloseProyCarousel();
 			  
+			  //wait until Alert disappears
+			  homePage.AlertIsInvisible();	 
+			  			  			  
 			  //Click New Operative Objective Button
 			  homePage.ClickNewOpObjButton();
 			  
 			  //Enter Name New Operative Objective
 			  homePage.EnterNameNewOBJ("Automated New Operative Objective " + rndNum1);
 			  
-			  homePage.waitForLoad(driver);
+			  //homePage.waitForLoad(driver);
 			
 			  //Save New Operative Objective
 			  homePage.ClickSaveOpObjButton();

@@ -57,6 +57,8 @@ public class NewStrategicObjTest extends DriverSetUp {
 		  //Wait until Spinner disappears
 		  homePage.SpinnerIsInvisible();
 		  
+		  homePage.CloseProyCarousel();
+		  
 		  //wait until Alert disappears
 		  homePage.AlertIsInvisible();	  
 		  
@@ -66,13 +68,12 @@ public class NewStrategicObjTest extends DriverSetUp {
 		  //Enter Name New Strategic Objective
 		  homePage.EnterNameNewOBJ("Automated New Strategic Objective " + rndNum1);
 		  
-		  //wait until Alert disappears
-		  homePage.AlertIsInvisible();
-		
+		  homePage.SpinnerIsInvisible();
+		  
 		  //Save New Strategic Objective
 		  homePage.ClickSaveStrategicObjButton();
 		  
-		  homePage.SpinnerIsInvisible();			  
+		  homePage.SpinnerIsInvisible();		  
 	
 		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
 	}
@@ -85,8 +86,8 @@ public class NewStrategicObjTest extends DriverSetUp {
 		  //Exit
 		  homePage.ClickExitButton(); 
 		  
-		// Close the driver
-		driver.quit();
+		  // Close the driver
+		  driver.quit();
 	  }
 
 }

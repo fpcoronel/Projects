@@ -54,13 +54,19 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 		  
 		  //Click Login Button
 		  loginPage.ClickLoginButton();
+		  
+		  //homePage.ErrorIsPresent();
  
 		  //Wait until Spinner disappears
 		  homePage.SpinnerIsInvisible();
 		  
+		  homePage.CloseProyCarousel();
+		  
 		  //wait until Alert disappears
 		  homePage.AlertIsInvisible();	  
 		  
+		  homePage.waitForLoad(driver);
+	 
 		  //Click New Strategic Objective Button
 		  homePage.ClickNewStrategicObjButton();
 		  
@@ -75,6 +81,8 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 			  //Create new Indicator
 			  homePage.ClickNewIndButton(i);
 			  
+			  homePage.SpinnerIsInvisible();
+			  
 			  String IndNum = Integer.toString(i + 1);
 			  //Enter New Indicator Name
 			  homePage.EnterNameNewInd(i, "Indicator " + rndNum1 + "_" + IndNum);
@@ -87,7 +95,7 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 		  }		  
 		
 		  //Save New Strategic Objective
-		  homePage.ClickSaveStrategicObjButton();	
+		  homePage.ClickSaveStrategicObjButton();
 		  		   
 		  //Wait Spinner
 		  homePage.SpinnerIsInvisible();
@@ -97,10 +105,17 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 		  
 		  homePage.waitForLoad(driver);
 		  
+		  //homePage.ErrorIsPresent();
+		  
 		  //Display Strategic Obj
 		  homePage.DisplayStrategicObj("Automated Strategic Objective " + rndNum1);
 
 		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated Strategic Objective " + rndNum1), "Objetivo no encontrado");
+		  
+		  for (int i = 0; i < 2; i++){
+			  String IndNum = Integer.toString(i + 1);
+			  Assert.assertTrue(homePage.IndicatorIsCreated("Indicator " + rndNum1 + "_" + IndNum), "Indicador no encontrado");
+		  }
 	}
 	
 	  @AfterClass

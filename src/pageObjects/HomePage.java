@@ -81,6 +81,10 @@ public class HomePage {
 	@FindBy(how=How.CSS, using="div[href='#carouselContent']")
 	private WebElement ProyCarousel;
 	
+	@FindBy(how=How.CSS, using="button[ng-click='homeCtrl.collapseAll()']")
+	private WebElement CollapseAllButton;
+	
+
 	public HomePage(WebDriver driver){
 		this.driver=driver;
 	}
@@ -169,6 +173,11 @@ public class HomePage {
 	public void ClickExitButton()
 	{
 		exitButton.click();
+	}
+	
+	//Collapse ll
+	public void CollapseAll(){
+		CollapseAllButton.click();
 	}
 	
 	//Click New Operative Objective Button
@@ -308,6 +317,34 @@ public class HomePage {
 					 editButton.click();
 				 }				 
 			 }	
+		}
+		
+		//Click New Operative Obj button on specific Strategic Obj
+		
+		public void ClickSpecNewOpObjButton(String pSTObj){
+			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+			
+			 for(int i=0;i<STObjElements.size();i++){
+				 String STObj =(STObjElements.get(i).getText());
+				 if (STObj.equals(pSTObj)){
+					 
+					 String att_href = (STObjElements.get(i).getAttribute("href"));
+					 String id = att_href.substring(att_href.length() - 3);					 
+								 
+					 String Selector = ("#grupo-level-" + id + " > div.contentName > button");
+					 
+					 WebElement NewButton = driver.findElement(By.cssSelector(Selector));					 
+					 
+					 // Create instance of Javascript executor					 
+					 JavascriptExecutor je = (JavascriptExecutor) driver;
+					 
+					// now execute query which actually will scroll until that element is not appeared on page.					 
+					 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
+					
+					 //click edit button
+					 NewButton.click();					 
+				 }
+			 }
 		}
 		
 		//Assert Indicators

@@ -124,10 +124,10 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 		  HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		  
 		  //Exit
-		  //homePage.ClickExitButton(); 
+		  homePage.ClickExitButton(); 
 		  
 		  //Close the driver
-		  //driver.quit();
+		  driver.quit();
 	  }
 
 }

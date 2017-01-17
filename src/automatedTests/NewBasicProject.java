@@ -78,6 +78,14 @@ public class NewBasicProject extends DriverSetUp{
 		  homePage.AlertIsInvisible();		  
 		  
 		  homePage.ClickSpecNewOpObjButton("Automated New Strategic Objective " + rndNum1);
+		  
+		  homePage.EnterNameNewOBJ("New Operative Obj" + rndNum1 );
+		  
+		  homePage.ClickSaveOpObjButton();
+		  
+		  homePage.SpinnerIsInvisible();
+		  
+		  
 	
 		  //Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
 	}

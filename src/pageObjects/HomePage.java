@@ -28,10 +28,10 @@ public class HomePage {
 	@FindBy(how=How.CSS, using="button[ng-click='homeCtrl.addStrategicObjective(homeCtrl.jurisdiccion.idJurisdiccion)']")
 	 private WebElement NewStrategicOpButton;
 		
-	@FindBy(how=How.XPATH, using="//*[@id=\"name\"]")
+	@FindBy(how=How.ID, using="name")
 	private WebElement NameNewObjField;	
 
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/button[1]")  
+	@FindBy(how=How.CSS, using="#grupo-level-3-3 > div > form > button.btn.btn-success")  
 	private WebElement SaveOpObjButton;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/button[1]")  
@@ -40,7 +40,7 @@ public class HomePage {
 	@FindBy(how=How.CSS, using="#grupo-level-1 > ul") 
 	private WebElement ListOpObj;
 	
-	@FindBy(how=How.CLASS_NAME, using="colorObjOperativo") //"/html/body/div[1]/main/main/div/div/div/div[4]/div/div[3]/div[2]")  
+	@FindBy(how=How.CLASS_NAME, using="colorObjOperativo")
 	private WebElement ListSTObj;
 
 	@FindBy(how=How.CSS, using="body > div.loadingoverlay")
@@ -49,7 +49,6 @@ public class HomePage {
 	@FindBy(how=How.ID, using="alert")
 	private WebElement Alert;	
 	
-	//@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[3]/div/button")  
 	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
 	private WebElement NewInd1Button;
 	
@@ -62,7 +61,6 @@ public class HomePage {
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[3]/input")
 	private WebElement I1RelWeightField;
 	
-	//@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[4]/div/button")  
 	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
 	private WebElement NewInd2Button;
 	

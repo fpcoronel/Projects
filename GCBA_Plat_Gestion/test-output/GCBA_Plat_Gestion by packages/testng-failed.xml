@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [GCBA_Plat_Gestion by packages]">
+  <parameter name="appURL" value="http://pbarel.hexacta.com/"/>
+  <parameter name="browserType" value="chrome"/>
+  <test name="automatedTests(failed)">
+    <classes>
+      <class name="automatedTests.NewOperativeObjTest">
+        <methods>
+          <include name="initializeDriverSetup"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- automatedTests.NewOperativeObjTest -->
+      <class name="automatedTests.LoginTest">
+        <methods>
+          <include name="initializeDriverSetup"/>
+          <include name="afterClass"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- automatedTests.LoginTest -->
+      <class name="automatedTests.NewStrategicObjTest">
+        <methods>
+          <include name="initializeDriverSetup"/>
+          <include name="setUp"/>
+          <include name="CreateNewStrategicObj"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- automatedTests.NewStrategicObjTest -->
+    </classes>
+  </test> <!-- automatedTests(failed) -->
+</suite> <!-- Failed suite [GCBA_Plat_Gestion by packages] -->

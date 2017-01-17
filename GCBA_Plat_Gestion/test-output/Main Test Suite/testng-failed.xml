@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="5" name="Failed suite [Main Test Suite]">
+  <parameter name="appURL" value="http://pbarel.hexacta.com/"/>
+  <parameter name="browserType" value="chrome"/>
+  <test name="PIG - Automated Testing(failed)">
+    <classes>
+      <class name="automatedTests.NewOperativeObjTest">
+        <methods>
+          <include name="CreateNewObjOp"/>
+          <include name="initializeDriverSetup"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- automatedTests.NewOperativeObjTest -->
+      <class name="automatedTests.NewStrategicObjTest">
+        <methods>
+          <include name="initializeDriverSetup"/>
+          <include name="setUp"/>
+          <include name="CreateNewStrategicObj"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- automatedTests.NewStrategicObjTest -->
+      <class name="automatedTests.LoginTest">
+        <methods>
+          <include name="initializeDriverSetup"/>
+          <include name="afterClass"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- automatedTests.LoginTest -->
+    </classes>
+  </test> <!-- PIG - Automated Testing(failed) -->
+</suite> <!-- Failed suite [Main Test Suite] -->

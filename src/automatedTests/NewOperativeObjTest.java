@@ -77,7 +77,7 @@ public class NewOperativeObjTest extends DriverSetUp{
 			  
 			  homePage.SpinnerIsInvisible();			  
 
-			  Assert.assertTrue(homePage.ObjectiveisPresent("Automated New Operative Objective " + rndNum1), "Objetivo no encontrado");
+			  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Operative Objective " + rndNum1), "Objetivo no encontrado");
 			  
 		}
 		

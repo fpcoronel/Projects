@@ -77,17 +77,40 @@ public class NewBasicProject extends DriverSetUp{
 		  //wait until Alert disappears
 		  homePage.AlertIsInvisible();		  
 		  
-		  homePage.ClickSpecNewOpObjButton("Automated New Strategic Objective " + rndNum1);
-		  
-		  homePage.EnterNameNewOBJ("New Operative Obj" + rndNum1 );
-		  
-		  homePage.ClickSaveOpObjButton();
+		  homePage.ClickNewOpObjButton("Automated New Strategic Objective " + rndNum1);
 		  
 		  homePage.SpinnerIsInvisible();
 		  
+		  homePage.EnterNameNewOBJ("New Operative Obj " + rndNum1 );
+		  		  
+		  homePage.ClickSaveOpObjButton();
 		  
+		  //wait until Alert disappears
+		  homePage.AlertIsInvisible();	
+		  
+		  //Display Objective
+		  homePage.DisplayOperativeObj("New Operative Obj " + rndNum1);
+		  
+		  //Click New Project Button
+		  homePage.ClickNewProjectButton("New Operative Obj " + rndNum1);
+		  
+		  homePage.SpinnerIsInvisible();
+		  
+		  homePage.EnterNameNewOBJ("New Project " + rndNum1 );
+		  
+		  homePage.EnterStartDate("08/04/2017");
+		  
+		  homePage.EnterEndDate("08/06/2017");
+		  
+		  homePage.SaveDraftProject();
+		  
+		  homePage.SpinnerIsInvisible();
 	
-		  //Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
+		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
+		  Assert.assertTrue(homePage.STObjectiveisPresent("New Operative Obj " + rndNum1), "Objetivo no encontrado");
+		  Assert.assertTrue(homePage.STObjectiveisPresent("New Project " + rndNum1), "Proyecto no encontrado");
+		  
+		  
 	}
 	
 	  @AfterClass

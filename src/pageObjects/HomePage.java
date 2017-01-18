@@ -19,7 +19,7 @@ public class HomePage {
 	@FindBy(how=How.ID, using="errorModal")
 	private WebElement Error;	
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"bs-example-navbar-collapse-1\"]/ul[2]/li[2]/a")
+	@FindBy(how=How.CSS, using="a[class='menuExit']")
 	private WebElement exitButton;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-1\"]/div[1]/button/span")
@@ -33,8 +33,8 @@ public class HomePage {
 
 	@FindBy(how=How.CSS, using="#grupo-level-3-3 > div > form > button.btn.btn-success")  
 	private WebElement SaveOpObjButton;
-	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/button[1]")  
+		
+	@FindBy(how=How.CSS, using="#grupo-level-3-3 > div > form > button.btn.btn-success")  
 	private WebElement SaveStrategicObjButton;	
 	
 	@FindBy(how=How.CSS, using="#grupo-level-1 > ul") 
@@ -82,6 +82,16 @@ public class HomePage {
 	@FindBy(how=How.CSS, using="button[ng-click='homeCtrl.collapseAll()']")
 	private WebElement CollapseAllButton;
 	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.fechaInicio']")
+	private WebElement StartDateField;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.fechaFin']")
+	private WebElement EndDateField;
+	
+	@FindBy(how=How.ID, using="draftButton")
+	private WebElement ProjectDraftButton;
+	
+	public String id = "";
 
 	public HomePage(WebDriver driver){
 		this.driver=driver;
@@ -143,22 +153,6 @@ public class HomePage {
 		return check;
 	}
 
-	//Assert Operative Objective
-	public boolean ObjectiveisPresent(String newOpObj) {		
-		boolean check = false;
-		List<WebElement> OpObjElements = ListOpObj.findElements(By.tagName("li"));		
-		//WebDriverWait wait = new WebDriverWait(driver, 20);
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#grupo-level-1 > ul")));
-			
-		 for(int i=0;i<OpObjElements.size();i++){
-			 String OpObj =(OpObjElements.get(i).getText());
-			 if (OpObj.equals(newOpObj)){
-				 check = true;				 
-			 }
-		 }
-		 return check;
-	}
-	
 	//Exit button is present?
 	public boolean ExitIsPresent() {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -290,12 +284,30 @@ public class HomePage {
 			 return check;
 		}
 		
-		//Display Strategic Obj
-		public void DisplayStrategicObj(String pSTObj){
+		//Get Element ID
+		public String GetID(String ObjName){
 			
+			String id = "";
 			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
 			
 			 for(int i=0;i<STObjElements.size();i++){
+				 String STObj =(STObjElements.get(i).getText());
+				 if (STObj.equals(ObjName)){
+					 
+					 String att_href = (STObjElements.get(i).getAttribute("href"));
+					 id = att_href.substring(att_href.length() - 3);
+			     }
+			 }
+			 return id;
+		}
+		
+		
+		//Display Strategic Obj
+		public void DisplayStrategicObj(String ObjName){
+			
+			//List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+			
+			 /*for(int i=0;i<STObjElements.size();i++){
 				 String STObj =(STObjElements.get(i).getText());
 				 if (STObj.equals(pSTObj)){
 					 
@@ -314,13 +326,25 @@ public class HomePage {
 					 //click edit button
 					 editButton.click();
 				 }				 
-			 }	
+			 }*/
+			 
+			 String id = GetID(ObjName);
+			 WebElement editButton = driver.findElement(By.xpath("//*[@id=\"es-" + id + "\"]/div/div/div/p/span"));
+			 
+			// Create instance of Javascript executor					 
+			 JavascriptExecutor je = (JavascriptExecutor) driver;
+			 
+			// now execute query which actually will scroll until that element is not appeared on page.					 
+			 je.executeScript("arguments[0].scrollIntoView(true);",editButton);
+			 
+			 //click edit button
+			 editButton.click(); 
 		}
 		
 		//Click New Operative Obj button on specific Strategic Obj
 		
-		public void ClickSpecNewOpObjButton(String pSTObj){
-			List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+		public void ClickNewOpObjButton(String ObjName){
+			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
 			
 			 for(int i=0;i<STObjElements.size();i++){
 				 String STObj =(STObjElements.get(i).getText());
@@ -340,10 +364,116 @@ public class HomePage {
 					 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
 					
 					 //click edit button
+					 NewButton.click();				 
+				 }	
+			 }*/
+			 
+			 String id = GetID(ObjName);
+			 String Selector = ("#grupo-level-" + id + " > div.contentName > button");
+			 
+			 WebElement NewButton = driver.findElement(By.cssSelector(Selector));					 
+			 
+			 // Create instance of Javascript executor					 
+			 JavascriptExecutor je = (JavascriptExecutor) driver;
+			 
+			// now execute query which actually will scroll until that element is not appeared on page.					 
+			 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
+			
+			 //click edit button
+			 NewButton.click();					
+		}
+		
+		public void ClickNewProjectButton(String ObjName){
+			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+			
+			 for(int i=0;i<STObjElements.size();i++){
+				 String STObj =(STObjElements.get(i).getText());
+				 if (STObj.equals(pOpObj)){
+					 
+					 String att_href = (STObjElements.get(i).getAttribute("href"));
+					 String id = att_href.substring(att_href.length() - 3);		 
+			 
+					 WebElement NewButton = driver.findElement(By.id("addProjectButton-" + id));					 
+					 
+					 // Create instance of Javascript executor					 
+					 JavascriptExecutor je = (JavascriptExecutor) driver;
+					 
+					// now execute query which actually will scroll until that element is not appeared on page.					 
+					 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
+					
+					 //click edit button
 					 NewButton.click();					 
 				 }
-			 }
+			 } */
+			 
+			
+			String id = GetID(ObjName);
+			 WebElement NewButton = driver.findElement(By.id("addProjectButton-" + id));					 
+			 
+			 // Create instance of Javascript executor					 
+			 JavascriptExecutor je = (JavascriptExecutor) driver;
+			 
+			// now execute query which actually will scroll until that element is not appeared on page.					 
+			 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
+			
+			 //click edit button
+			 NewButton.click();		
 		}
+		
+		//Display Operative Obj
+		public void DisplayOperativeObj(String ObjName){
+			
+			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
+			
+			 for(int i=0;i<STObjElements.size();i++){
+				 String STObj =(STObjElements.get(i).getText());
+				 if (STObj.equals(pOpObj)){
+					 
+					 //Create xpath to locate element
+					 String att_href = (STObjElements.get(i).getAttribute("href"));
+					 String id = att_href.substring(att_href.length() - 3);
+					 
+					 WebElement Expand = driver.findElement(By.xpath("//*[@id=\"op-" + id + "\"]/div/div/div/div"));
+					 
+					// Create instance of Javascript executor					 
+					 JavascriptExecutor je = (JavascriptExecutor) driver;
+					 
+					// now execute query which actually will scroll until that element is not appeared on page.					 
+					 je.executeScript("arguments[0].scrollIntoView(true);",Expand);
+					 
+					 //click edit button
+					 Expand.click();
+				 }				 
+			 }*/
+			 
+			 String id = GetID(ObjName);
+			 WebElement Expand = driver.findElement(By.xpath("//*[@id=\"op-" + id + "\"]/div/div/div/div"));
+			 
+			// Create instance of Javascript executor					 
+			 JavascriptExecutor je = (JavascriptExecutor) driver;
+			 
+			// now execute query which actually will scroll until that element is not appeared on page.					 
+			 je.executeScript("arguments[0].scrollIntoView(true);",Expand);
+			 
+			 //click edit button
+			 Expand.click();
+		}
+		
+		//Enter Project start date
+		public void EnterStartDate(String StartDate){
+			StartDateField.sendKeys(StartDate);
+		}
+		
+		//Enter Project end date
+		public void EnterEndDate(String EndDate){
+			EndDateField.sendKeys(EndDate);
+		}
+		
+		//Save Draft Project
+		public void SaveDraftProject(){
+			ProjectDraftButton.click();
+		}
+		
 		
 		//Assert Indicators
 		public boolean IndicatorIsCreated(String pIndicatorName){

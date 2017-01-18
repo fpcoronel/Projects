@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+<suite guice-stage="DEVELOPMENT" verbose="5" name="Failed suite [Main Test Suite]">
   <parameter name="appURL" value="http://pbarel.hexacta.com/"/>
   <parameter name="browserType" value="chrome"/>
   <test name="Default test(failed)">
@@ -16,4 +16,4 @@
       </class> <!-- automatedTests.NewBasicProject -->
     </classes>
   </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+</suite> <!-- Failed suite [Main Test Suite] -->

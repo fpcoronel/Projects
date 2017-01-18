@@ -50,16 +50,16 @@ public class HomePage {
 	private WebElement Alert;	
 	
 	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
-	private WebElement NewInd1Button;
+	private WebElement NewIndicatorButton;
 	
-	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[1]/input") 
-	private WebElement Ind1NameField;
+	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[1]/input")
+	private WebElement IndicatorNameField;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[2]/input")
-	private WebElement I1CalcMethNameField;
+	private WebElement IndCalcMethNameField;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"grupo-level-3-3\"]/div/form/div/div[2]/div[3]/input")
-	private WebElement I1RelWeightField;
+	private WebElement IndRelWeightField;
 	
 	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.addIndicador()']")
 	private WebElement NewInd2Button;
@@ -210,18 +210,20 @@ public class HomePage {
 	}
 	
 	//Click New Indicator Button
-	public void ClickNewIndButton(int Ind)
+	public void ClickNewIndButton()
 	{
-		switch(Ind) {
+		NewIndicatorButton.click();
+		/*switch(Ind) {
         case 0:
-        	NewInd1Button.click();
+        	NewIndicatorButton.click();
 		break;
         case 1:
-        	NewInd2Button.click();
+        	NewIndicatorButton.click();
+        	//NewInd2Button.click();
 		break;
         default:
         	break;
-		}	
+		}*/	
 	}
 	
 	//Enter new Indicator name
@@ -229,7 +231,7 @@ public class HomePage {
 	{
 		switch(ind) {
         case 0:
-        	Ind1NameField.sendKeys(newIndName);
+        	IndicatorNameField.sendKeys(newIndName);
 		break;
         case 1:
         	Ind2NameField.sendKeys(newIndName);
@@ -244,7 +246,7 @@ public class HomePage {
 	{
 		switch(ind) {
         case 0:
-        	I1CalcMethNameField.sendKeys(newMethCalcName);
+        	IndCalcMethNameField.sendKeys(newMethCalcName);
 		break;
         case 1:
         	I2CalcMethNameField.sendKeys(newMethCalcName);
@@ -260,7 +262,7 @@ public class HomePage {
 		
 		switch(ind) {
         case 0:
-        	I1RelWeightField.sendKeys(RelWeight);
+        	IndRelWeightField.sendKeys(RelWeight);
 		break;
         case 1:
         	I2RelWeightField.sendKeys(RelWeight);
@@ -305,29 +307,6 @@ public class HomePage {
 		//Display Strategic Obj
 		public void DisplayStrategicObj(String ObjName){
 			
-			//List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
-			
-			 /*for(int i=0;i<STObjElements.size();i++){
-				 String STObj =(STObjElements.get(i).getText());
-				 if (STObj.equals(pSTObj)){
-					 
-					 //Create xpath to locate element
-					 String att_href = (STObjElements.get(i).getAttribute("href"));
-					 String id = att_href.substring(att_href.length() - 3);
-					 
-					 WebElement editButton = driver.findElement(By.xpath("//*[@id=\"es-" + id + "\"]/div/div/div/p/span"));
-					 
-					// Create instance of Javascript executor					 
-					 JavascriptExecutor je = (JavascriptExecutor) driver;
-					 
-					// now execute query which actually will scroll until that element is not appeared on page.					 
-					 je.executeScript("arguments[0].scrollIntoView(true);",editButton);
-					 
-					 //click edit button
-					 editButton.click();
-				 }				 
-			 }*/
-			 
 			 String id = GetID(ObjName);
 			 WebElement editButton = driver.findElement(By.xpath("//*[@id=\"es-" + id + "\"]/div/div/div/p/span"));
 			 
@@ -344,34 +323,11 @@ public class HomePage {
 		//Click New Operative Obj button on specific Strategic Obj
 		
 		public void ClickNewOpObjButton(String ObjName){
-			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
-			
-			 for(int i=0;i<STObjElements.size();i++){
-				 String STObj =(STObjElements.get(i).getText());
-				 if (STObj.equals(pSTObj)){
-					 
-					 String att_href = (STObjElements.get(i).getAttribute("href"));
-					 String id = att_href.substring(att_href.length() - 3);					 
-								 
-					 String Selector = ("#grupo-level-" + id + " > div.contentName > button");
-					 
-					 WebElement NewButton = driver.findElement(By.cssSelector(Selector));					 
-					 
-					 // Create instance of Javascript executor					 
-					 JavascriptExecutor je = (JavascriptExecutor) driver;
-					 
-					// now execute query which actually will scroll until that element is not appeared on page.					 
-					 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
-					
-					 //click edit button
-					 NewButton.click();				 
-				 }	
-			 }*/
 			 
 			 String id = GetID(ObjName);
-			 String Selector = ("#grupo-level-" + id + " > div.contentName > button");
+			 String selector = ("#grupo-level-" + id + " > div.contentName > button");
 			 
-			 WebElement NewButton = driver.findElement(By.cssSelector(Selector));					 
+			 WebElement NewButton = driver.findElement(By.cssSelector(selector));					 
 			 
 			 // Create instance of Javascript executor					 
 			 JavascriptExecutor je = (JavascriptExecutor) driver;
@@ -384,30 +340,8 @@ public class HomePage {
 		}
 		
 		public void ClickNewProjectButton(String ObjName){
-			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
 			
-			 for(int i=0;i<STObjElements.size();i++){
-				 String STObj =(STObjElements.get(i).getText());
-				 if (STObj.equals(pOpObj)){
-					 
-					 String att_href = (STObjElements.get(i).getAttribute("href"));
-					 String id = att_href.substring(att_href.length() - 3);		 
-			 
-					 WebElement NewButton = driver.findElement(By.id("addProjectButton-" + id));					 
-					 
-					 // Create instance of Javascript executor					 
-					 JavascriptExecutor je = (JavascriptExecutor) driver;
-					 
-					// now execute query which actually will scroll until that element is not appeared on page.					 
-					 je.executeScript("arguments[0].scrollIntoView(true);",NewButton);
-					
-					 //click edit button
-					 NewButton.click();					 
-				 }
-			 } */
-			 
-			
-			String id = GetID(ObjName);
+			 String id = GetID(ObjName);
 			 WebElement NewButton = driver.findElement(By.id("addProjectButton-" + id));					 
 			 
 			 // Create instance of Javascript executor					 
@@ -422,30 +356,7 @@ public class HomePage {
 		
 		//Display Operative Obj
 		public void DisplayOperativeObj(String ObjName){
-			
-			/*List<WebElement> STObjElements = ListSTObj.findElements(By.className("nameObj"));
-			
-			 for(int i=0;i<STObjElements.size();i++){
-				 String STObj =(STObjElements.get(i).getText());
-				 if (STObj.equals(pOpObj)){
-					 
-					 //Create xpath to locate element
-					 String att_href = (STObjElements.get(i).getAttribute("href"));
-					 String id = att_href.substring(att_href.length() - 3);
-					 
-					 WebElement Expand = driver.findElement(By.xpath("//*[@id=\"op-" + id + "\"]/div/div/div/div"));
-					 
-					// Create instance of Javascript executor					 
-					 JavascriptExecutor je = (JavascriptExecutor) driver;
-					 
-					// now execute query which actually will scroll until that element is not appeared on page.					 
-					 je.executeScript("arguments[0].scrollIntoView(true);",Expand);
-					 
-					 //click edit button
-					 Expand.click();
-				 }				 
-			 }*/
-			 
+		
 			 String id = GetID(ObjName);
 			 WebElement Expand = driver.findElement(By.xpath("//*[@id=\"op-" + id + "\"]/div/div/div/div"));
 			 

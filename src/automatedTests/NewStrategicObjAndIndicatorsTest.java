@@ -79,7 +79,7 @@ public class NewStrategicObjAndIndicatorsTest extends DriverSetUp {
 		  for (int i = 0; i < 2; i++){
 			
 			  //Create new Indicator
-			  homePage.ClickNewIndButton(i);
+			  homePage.ClickNewIndButton();
 			  
 			  homePage.SpinnerIsInvisible();
 			  

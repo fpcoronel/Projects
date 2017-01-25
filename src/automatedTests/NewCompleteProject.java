@@ -20,8 +20,7 @@ import driverSetUp.DriverSetUp;
 import pageObjects.LoginPage;
 import pageObjects.HomePage;
 
-
-public class NewBasicProject extends DriverSetUp{
+public class NewCompleteProject extends DriverSetUp{
 	private WebDriver driver;
 	
 	@Parameters({ "browserType", "appURL" })
@@ -31,8 +30,9 @@ public class NewBasicProject extends DriverSetUp{
 		driver = getDriver();
 	}
 	
-	@Test(description = "Crear nuevo Proyecto")
-	public void CreateNewProject() throws InterruptedException{
+	@Parameters({ "appURL" })
+	@Test(description = "Crear nuevo Proyecto - Datos avanzados")
+	public void CreateNewProject(String appURL) throws InterruptedException{
 		
 		  Random rndNum= new Random();
 		  int rndNum1 = 0;
@@ -56,10 +56,12 @@ public class NewBasicProject extends DriverSetUp{
 		  //Wait until Spinner disappears
 		  homePage.SpinnerIsInvisible();
 		  
+		  driver.navigate().to(appURL + "/home/tree");
+		  
 		  //wait until Alert disappears
 		  homePage.AlertIsInvisible();	
 		  
-		  homePage.CloseProyCarousel();
+		  //homePage.CloseProyCarousel();
 		  
 		  //Click New Strategic Objective Button
 		  homePage.ClickNewStrategicObjButton();
@@ -93,7 +95,7 @@ public class NewBasicProject extends DriverSetUp{
 		  
 		  //Click New Project Button
 		  homePage.ClickNewProjectButton("New Operative Obj " + rndNum1);
-		  
+		  		  	  
 		  homePage.SpinnerIsInvisible();
 		  
 		  homePage.EnterNameNewOBJ("New Project " + rndNum1 );
@@ -102,15 +104,39 @@ public class NewBasicProject extends DriverSetUp{
 		  
 		  homePage.EnterEndDate("08/06/2017");
 		  
+		  homePage.EnterProjectDescription("Description" + rndNum1);
 		  
+		  homePage.EnterProjectMeta("Meta" + rndNum1);
 		  
-		  homePage.SaveDraftProject();
+		  homePage.EnterProjectUnit("Unit" + rndNum1);
+		  
+		  homePage.EnterProjectFunds(rndNum1);
+		  
+		  homePage.EnterProjectOtherFunds(rndNum1);
+		  
+		  homePage.EnterProjectQtyImpactedPopulation(200000);
+		  
+		  homePage.DisplayImpactedPopulationList();
+		  
+		  homePage.SpinnerIsInvisible();
+		  
+		  homePage.GetPopulationOption("Adulto");
+		  
+		  homePage.EnterResponsible("Proj Responsible");
+		  
+		  homePage.GetLocation("Dirección");
+		  
+		  homePage.GetProjectArea("Unidad de Prensa y Comunicación Institucional");
+		  
+		  homePage.EnterCoResponsible("Automation CoResponsible");
+		  
+		  //homePage.SaveDraftProject();
 		  
 		  homePage.SpinnerIsInvisible();
 	
 		  Assert.assertTrue(homePage.STObjectiveisPresent("Automated New Strategic Objective " + rndNum1), "Objetivo no encontrado");
 		  Assert.assertTrue(homePage.STObjectiveisPresent("New Operative Obj " + rndNum1), "Objetivo no encontrado");
-		  Assert.assertTrue(homePage.STObjectiveisPresent("New Project " + rndNum1), "Proyecto no encontrado");		  
+		  //Assert.assertTrue(homePage.STObjectiveisPresent("New Project " + rndNum1), "Proyecto no encontrado");		  
 	}
 	
 	  @AfterClass
@@ -124,5 +150,4 @@ public class NewBasicProject extends DriverSetUp{
 		  // Close the driver
 		  //driver.quit();
 	  }
-
 }

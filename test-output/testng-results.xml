@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Main Test Suite" duration-ms="44466" started-at="2017-01-18T18:19:56Z" finished-at="2017-01-18T18:20:40Z">
+  <suite name="Main Test Suite" duration-ms="63621" started-at="2017-01-25T21:12:24Z" finished-at="2017-01-25T21:13:27Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="44466" started-at="2017-01-18T18:19:56Z" finished-at="2017-01-18T18:20:40Z">
-      <class name="automatedTests.NewStrategicObjAndIndicatorsTest">
-        <test-method status="PASS" signature="initializeDriverSetup(java.lang.String, java.lang.String)[pri:0, instance:automatedTests.NewStrategicObjAndIndicatorsTest@5e5792a0]" name="initializeDriverSetup" is-config="true" duration-ms="7424" started-at="2017-01-18T15:19:56Z" finished-at="2017-01-18T15:20:03Z">
+    <test name="Default test" duration-ms="63621" started-at="2017-01-25T21:12:24Z" finished-at="2017-01-25T21:13:27Z">
+      <class name="automatedTests.NewCompleteProject">
+        <test-method status="PASS" signature="initializeDriverSetup(java.lang.String, java.lang.String)[pri:0, instance:automatedTests.NewCompleteProject@5e5792a0]" name="initializeDriverSetup" is-config="true" duration-ms="6762" started-at="2017-01-25T18:12:24Z" finished-at="2017-01-25T18:12:31Z">
           <params>
             <param index="0">
               <value>
@@ -23,23 +23,30 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeDriverSetup -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:automatedTests.NewStrategicObjAndIndicatorsTest@5e5792a0]" name="setUp" is-config="true" duration-ms="0" started-at="2017-01-18T15:20:03Z" finished-at="2017-01-18T15:20:03Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:automatedTests.NewCompleteProject@5e5792a0]" name="setUp" is-config="true" duration-ms="0" started-at="2017-01-25T18:12:31Z" finished-at="2017-01-25T18:12:31Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="CreateNewStrategicObjandInd()[pri:0, instance:automatedTests.NewStrategicObjAndIndicatorsTest@5e5792a0]" name="CreateNewStrategicObjandInd" duration-ms="34208" started-at="2017-01-18T15:20:03Z" description="Crear nuevo Objetivo Estratégico" finished-at="2017-01-18T15:20:37Z">
+        <test-method status="PASS" signature="CreateNewProject(java.lang.String)[pri:0, instance:automatedTests.NewCompleteProject@5e5792a0]" name="CreateNewProject" duration-ms="56828" started-at="2017-01-25T18:12:31Z" description="Crear nuevo Proyecto - Datos avanzados" finished-at="2017-01-25T18:13:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[http://pbarel.hexacta.com/]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- CreateNewStrategicObjandInd -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:automatedTests.NewStrategicObjAndIndicatorsTest@5e5792a0]" name="afterClass" is-config="true" duration-ms="2801" started-at="2017-01-18T15:20:37Z" finished-at="2017-01-18T15:20:40Z">
+        </test-method> <!-- CreateNewProject -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:automatedTests.NewCompleteProject@5e5792a0]" name="afterClass" is-config="true" duration-ms="0" started-at="2017-01-25T18:13:27Z" finished-at="2017-01-25T18:13:27Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:automatedTests.NewStrategicObjAndIndicatorsTest@5e5792a0]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-01-18T15:20:40Z" finished-at="2017-01-18T15:20:40Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:automatedTests.NewCompleteProject@5e5792a0]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-01-25T18:13:27Z" finished-at="2017-01-25T18:13:27Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- automatedTests.NewStrategicObjAndIndicatorsTest -->
+      </class> <!-- automatedTests.NewCompleteProject -->
     </test> <!-- Default test -->
   </suite> <!-- Main Test Suite -->
 </testng-results>

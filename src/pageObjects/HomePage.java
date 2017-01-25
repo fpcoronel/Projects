@@ -1,6 +1,8 @@
 package pageObjects;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
@@ -90,6 +93,57 @@ public class HomePage {
 	
 	@FindBy(how=How.ID, using="draftButton")
 	private WebElement ProjectDraftButton;
+	
+	@FindBy(how=How.CSS, using="textarea[ng-model='formCtrl.currentProject.descripcion']")
+	private WebElement ProjectDescField;
+	
+	@FindBy(how=How.ID, using="meta")
+	private WebElement ProjectMeta;
+	
+	@FindBy(how=How.ID, using="unit")
+	private WebElement ProjectUnit;	
+	
+	@FindBy(how=How.CSS, using="input[ng-model='p.presupuesto']")
+	private WebElement ProjectFunds;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='p.otrasFuentes']")
+	private WebElement ProjectOtherFunds;	
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.poblacionAfectada']")
+	private WebElement projectAmountImpactedPopulation;	
+	
+	@FindBy(how=How.CSS, using="input[ng-model='newTag.text']")
+	private WebElement projectImpactedPopulationField;	
+	
+	@FindBy(how=How.CSS, using="div[ng-if='suggestionList.visible']")
+	private WebElement projectPopulationList;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.liderProyecto']")
+	private WebElement projectResponsible;
+	
+	@FindBy(how=How.CSS, using="select[ng-model='formCtrl.areaNombre']")
+	private WebElement projectArea;	
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.organismosCorresponsables']")
+	private WebElement projectCoResponsible;
+	
+	@FindBy(how=How.CSS, using="select[ng-model='formCtrl.currentProject.tipoUbicacionGeografica']")
+	private WebElement projectLocation;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.tipoProyecto'] [value='Nuevo']")
+	private WebElement projectTypeNuevo;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.tipoProyecto'] [value='Ampliación']")
+	private WebElement projectTypeAmpliacion;
+	
+	@FindBy(how=How.ID, using="eje-1")
+	private WebElement projectEje1;	
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.cambioLegislativo'] [value='false']")
+	private WebElement projectNoLegalChange;
+	
+	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.prioridadJurisdiccional'] [value='1.Alta']")
+	private WebElement projectPriority;	
 	
 	public String id = "";
 
@@ -213,17 +267,6 @@ public class HomePage {
 	public void ClickNewIndButton()
 	{
 		NewIndicatorButton.click();
-		/*switch(Ind) {
-        case 0:
-        	NewIndicatorButton.click();
-		break;
-        case 1:
-        	NewIndicatorButton.click();
-        	//NewInd2Button.click();
-		break;
-        default:
-        	break;
-		}*/	
 	}
 	
 	//Enter new Indicator name
@@ -370,6 +413,44 @@ public class HomePage {
 			 Expand.click();
 		}
 		
+		public void GetPopulationOption(String option){
+						
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestion-list")));
+			
+			List<WebElement> PopListElements = projectPopulationList.findElements(By.className("suggestion-item"));			
+			
+			 for(int i=0;i<PopListElements.size();i++){
+				 String item =(PopListElements.get(i).getText());
+				 System.out.println(item);
+				 if (item.equals(option)){
+					 PopListElements.get(i).click();
+					 SpinnerIsInvisible();
+					 i = PopListElements.size();
+					// wait.until(ExpectedConditions.stalenessOf(projectPopulationList));
+					 //wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[ng-if='suggestionList.visible']")));
+			     }
+			 }
+			 
+		}
+		
+		public void EnterResponsible(String responsible){
+			projectResponsible.click();
+			projectResponsible.sendKeys(responsible);
+		}
+		
+		public void GetProjectArea(String area){
+			//generar código para seleccionar area de proyecto
+			Select selectArea = new Select(projectArea);
+			selectArea.selectByVisibleText(area);
+		}
+		
+		public void GetLocation(String location){
+			//generar código para seleccionar area de proyecto
+			Select selectLocation = new Select(projectLocation);
+			selectLocation.selectByVisibleText(location);
+		}
+		
 		//Enter Project start date
 		public void EnterStartDate(String StartDate){
 			StartDateField.sendKeys(StartDate);
@@ -380,11 +461,52 @@ public class HomePage {
 			EndDateField.sendKeys(EndDate);
 		}
 		
+		public void EnterProjectDescription(String description){
+			ProjectDescField.sendKeys(description);
+		}
+		
+		public void EnterProjectMeta(String meta){
+			ProjectMeta.sendKeys(meta);
+		}
+		
+		public void EnterProjectUnit(String unit){
+			ProjectUnit.sendKeys(unit);
+		}
+		
+		public void EnterProjectFunds(int funds){
+			String sfunds = Integer.toString(funds);
+			ProjectFunds.sendKeys(sfunds);
+		}
+		
+		public void EnterProjectOtherFunds(int otherfunds){
+			String sofunds = Integer.toString(otherfunds);
+			ProjectOtherFunds.sendKeys(sofunds);
+		}
+		
+		public void EnterProjectQtyImpactedPopulation(int qty){
+			String amount = Integer.toString(qty);
+			projectAmountImpactedPopulation.sendKeys(amount);
+		}
+		
+		public void DisplayImpactedPopulationList(){
+			projectImpactedPopulationField.click();
+		}
+		
+		public void EnterProjectResponsible(String responsible){
+			projectResponsible.sendKeys(responsible);			
+		}
+		
+		public void EnterCoResponsible(String coResponsible){
+			projectCoResponsible.sendKeys(coResponsible);
+		}
+		
+		
+		
 		//Save Draft Project
 		public void SaveDraftProject(){
 			ProjectDraftButton.click();
 		}
-		
+
 		
 		//Assert Indicators
 		public boolean IndicatorIsCreated(String pIndicatorName){

@@ -130,7 +130,7 @@ public class HomePage {
 	@FindBy(how=How.CSS, using="select[ng-model='formCtrl.currentProject.tipoUbicacionGeografica']")
 	private WebElement projectLocation;
 	
-	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.tipoProyecto'] [value='Nuevo']")
+	@FindBy(how=How.CSS, using="input[checked ng-model='formCtrl.currentProject.tipoProyecto'] [value='Nuevo']")
 	private WebElement projectTypeNuevo;
 	
 	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.tipoProyecto'] [value='Ampliación']")
@@ -144,6 +144,9 @@ public class HomePage {
 	
 	@FindBy(how=How.CSS, using="input[ng-model='formCtrl.currentProject.prioridadJurisdiccional'] [value='1.Alta']")
 	private WebElement projectPriority;	
+	
+	@FindBy(how=How.CSS, using="button[ng-click='formCtrl.presentProject()']")
+	private WebElement saveButton;
 	
 	public String id = "";
 
@@ -446,9 +449,25 @@ public class HomePage {
 		}
 		
 		public void GetLocation(String location){
-			//generar código para seleccionar area de proyecto
+			//generar código para seleccionar Ubicación de proyecto
 			Select selectLocation = new Select(projectLocation);
 			selectLocation.selectByVisibleText(location);
+		}
+		
+		public void SetProjectType(){
+			projectTypeAmpliacion.click();
+		}
+		
+		public void SetGovAxis(){
+			projectEje1.click();
+		}
+		
+		public void NeedsLegalChange(){
+			projectNoLegalChange.click();
+		}
+				
+		public void ProjectPriority(){
+			projectPriority.click();
 		}
 		
 		//Enter Project start date
@@ -464,7 +483,7 @@ public class HomePage {
 		public void EnterProjectDescription(String description){
 			ProjectDescField.sendKeys(description);
 		}
-		
+																																																												
 		public void EnterProjectMeta(String meta){
 			ProjectMeta.sendKeys(meta);
 		}
@@ -506,7 +525,11 @@ public class HomePage {
 		public void SaveDraftProject(){
 			ProjectDraftButton.click();
 		}
-
+		
+		//Save Project
+		public void SaveProject(){
+			saveButton.click();
+		}
 		
 		//Assert Indicators
 		public boolean IndicatorIsCreated(String pIndicatorName){

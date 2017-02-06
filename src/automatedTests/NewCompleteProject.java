@@ -122,15 +122,27 @@ public class NewCompleteProject extends DriverSetUp{
 		  
 		  homePage.GetPopulationOption("Adulto");
 		  
-		  homePage.EnterResponsible("Proj Responsible");
+		  homePage.SpinnerIsInvisible();
 		  
-		  homePage.GetLocation("Dirección");
-		  
+		  homePage.EnterResponsible("Proj Responsible");		  
+		    
 		  homePage.GetProjectArea("Unidad de Prensa y Comunicación Institucional");
+		  
+		  homePage.SpinnerIsInvisible();
 		  
 		  homePage.EnterCoResponsible("Automation CoResponsible");
 		  
-		  //homePage.SaveDraftProject();
+		  homePage.GetLocation("Sin Definir");
+		  
+		  homePage.SetProjectType();
+		  
+		  homePage.SetGovAxis();
+		  
+		  homePage.NeedsLegalChange();
+		  
+		  homePage.ProjectPriority();
+		  
+		  homePage.SaveProject();
 		  
 		  homePage.SpinnerIsInvisible();
 	
